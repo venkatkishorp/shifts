@@ -1,0 +1,64 @@
+<div class="login-div">
+    <mat-card #loginCard>
+        <mat-card-content class="login-card">
+            <form>
+                <div class="form-group">
+                  <label for="user-id">User ID</label>
+                  <input type="text" 
+                         class="form-control" 
+                         name="user-id" 
+                         id="user-id" 
+                         placeholder="Enter User ID" 
+                         [(ngModel)]="userId"/>
+                </div>
+                <div class="pt-2 form-group" *ngIf="cardType === 'Signup'">
+                  <label for="user-name">User Name</label>
+                  <input type="text" 
+                         class="form-control" 
+                         name="user-name" 
+                         id="user-name" 
+                         placeholder="Enter User Name" 
+                         [(ngModel)]="userName"/>
+                </div>
+                <div class="pt-2 form-group">
+                  <label for="password">Password</label>
+                  <input type="password" 
+                         class="form-control" 
+                         name="user-password" 
+                         id="password" 
+                         placeholder="Enter password" 
+                         [(ngModel)]="userPassword"/>
+                </div>
+                <div class="pt-2 form-group" *ngIf="cardType === 'Signup'">
+                  <label for="confirm-password">Confirm Password</label>
+                  <input type="password" 
+                         class="form-control" 
+                         id="confirm-password" 
+                         placeholder="Re-enter password" 
+                         [(ngModel)]="confirmedPassword" 
+                         name="confirmed-password"
+                         (keyup)="validateConfirmedPassword()"/>
+                </div>
+                <div class="pt-3" *ngIf="cardType === 'Signup'">
+                    <button [disabled]="!(passwordValidated && confirmedPassword.length > 0 && userPassword.length > 0)" 
+                            type="submit" 
+                            class="btn btn-primary" 
+                            (click)="addUser()">Sign Up
+                    </button>
+                </div>
+                <div class="pt-3" *ngIf="cardType !== 'Signup'">
+                    <button type="submit" class="btn btn-primary" (click)="onUserLogin()">Login</button>
+                </div>
+                <div *ngIf="loginException" class="pt-1 form-group">
+                  <p style="color: red;">{{loginExceptionMessage}}</p>
+                </div>
+                <div class="pt-4 sign-up-button" *ngIf="cardType !== 'Signup'">
+                  <button class="btn btn-link" (click)="signUpUser()">Sign Up</button>
+                </div>
+                <div class="pt-4 sign-up-button" *ngIf="cardType === 'Signup'">
+                  <button class="btn btn-link" (click)="backToLogin()">Back to login</button>
+                </div>
+              </form>
+        </mat-card-content>
+    </mat-card>
+</div>

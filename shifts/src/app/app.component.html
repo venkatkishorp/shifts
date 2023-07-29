@@ -1,0 +1,3 @@
+<app-login-page *ngIf="!loginStatus" (name)="onReceiveName($event)"></app-login-page>
+
+<app-home-page [userName]="userName" *ngIf="loginStatus"></app-home-page>
